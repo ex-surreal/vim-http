@@ -143,7 +143,9 @@ endfunction
 
 function! s:show_in_output_buffer(request_buffer, response) abort
     let l:buffer_name = 'http-out.http'
-    execute 'bdelete ' . l:buffer_name
+    if bufwinnr(l:buffer_name) > 0
+        execute 'bdelete ' . l:buffer_name
+    endif
     if g:vim_http_split_vertically
       execute 'vert new ' . l:buffer_name
     else
