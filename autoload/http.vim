@@ -155,6 +155,7 @@ function! s:show_in_output_buffer(request_buffer, response) abort
 
     let l:response_lines = split(a:response, "\\(\r\n\\|\n\\)")
 
+    norm! gg"_dG
     call append(0, l:response_lines)
     norm! G"_ddgg
 endfunction
