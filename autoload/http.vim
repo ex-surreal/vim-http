@@ -141,9 +141,9 @@ function! s:remove_header(header) abort
   endfor
 endfunction
 
-function! s:new_response_buffer(request_buffer, response) abort
-    let l:request_buffer_name  = bufname(a:request_buffer)
-    let l:buffer_name = fnamemodify(l:request_buffer_name, ":r") . '.response.' . localtime() . '.http'
+function! s:show_in_output_buffer(request_buffer, response) abort
+    let l:buffer_name = 'http-out.http'
+    execute 'bdelete ' . l:buffer_name
     if g:vim_http_split_vertically
       execute 'vert new ' . l:buffer_name
     else
@@ -165,7 +165,7 @@ function! http#do_buffer(follow) abort
     let l:request = s:parse_request_buffer(l:buffer, a:follow)
     let l:curl = s:in_curl_format(l:request)
     let l:response = system(l:curl)
-    call s:new_response_buffer(l:buffer, l:response)
+    call s:show_in_output_buffer(l:buffer, l:response)
 endfunction
 
 function! http#show_curl(follow) abort
