@@ -81,7 +81,7 @@ endfunction
 function! s:in_curl_format(request) abort
     let l:curl_fmt = 'curl%s%s%s%s %s'
 
-    let l:flags = ' -si'
+    let l:flags = ' -s'
 
     if a:request.meta.follow == 1
         let l:flags = l:flags . 'L'
