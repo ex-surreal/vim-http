@@ -143,15 +143,14 @@ endfunction
 
 function! s:show_in_output_buffer(request_buffer, response) abort
     let l:buffer_name = 'http-out.http'
-    if bufwinnr(l:buffer_name) > 0
-        execute 'bdelete! ' . l:buffer_name
+    if bufwinnr(l:buffer_name) <= 0
+        if g:vim_http_split_vertically
+            execute 'vert new ' . l:buffer_name
+        else
+            execute 'new ' . l:buffer_name
+        end
     endif
-    if g:vim_http_split_vertically
-      execute 'vert new ' . l:buffer_name
-    else
-      execute 'new ' . l:buffer_name
-    end
-    set ft=http
+    set ft=json
 
     let l:response_lines = split(a:response, "\\(\r\n\\|\n\\)")
 
