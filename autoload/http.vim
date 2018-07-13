@@ -157,7 +157,11 @@ function! s:show_in_output_buffer(request_buffer, response) abort
 
     norm! gg"_dG
     call append(0, l:response_lines)
-    silent execute ":%!python -m json.tool"
+    if g:vim_http_json_formatter
+      silent execute ":%!" . g:vim_http_json_formatter
+    else
+      silent execute ":%!python -m json.tool"
+    endif
     norm! G"_ddgg
 endfunction
 
