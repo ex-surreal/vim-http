@@ -151,11 +151,13 @@ function! s:show_in_output_buffer(request_buffer, response) abort
         end
     endif
     set ft=json
+    set nowrap
 
     let l:response_lines = split(a:response, "\\(\r\n\\|\n\\)")
 
     norm! gg"_dG
     call append(0, l:response_lines)
+    silent execute ":%!python -m json.tool"
     norm! G"_ddgg
 endfunction
 
