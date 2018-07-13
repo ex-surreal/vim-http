@@ -150,6 +150,7 @@ function! s:show_in_output_buffer(request_buffer, response) abort
             execute 'new ' . l:buffer_name
         end
     endif
+    silent execute bufwinnr(l:buffer_name) 'wincmd w'
     set ft=json
     set nowrap
 
