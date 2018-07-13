@@ -163,7 +163,6 @@ function! s:show_in_output_buffer(request_buffer, response) abort
     else
       silent execute ":%!python -m json.tool"
     endif
-    norm! G"_ddgg
 endfunction
 
 function! http#do_buffer(follow) abort
